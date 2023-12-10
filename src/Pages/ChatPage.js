@@ -3,9 +3,11 @@ import { ChatState } from "../Context/ChatProvider"
 import SideDrawer from "../components/Miscellaneous/SideDrawer"
 import ChatBox from "../components/ChatBox"
 import MyChats from "../components/MyChats"
+import { useState } from "react"
 
 const ChatPage = () => {
    const {user} = ChatState()
+   const [fetchAgain, setFetchAgain] = useState(false);
 
   return (
     <div style={{ width: "100%"}}>
@@ -17,8 +19,10 @@ const ChatPage = () => {
         h='100vh'
         p='10px'
         >
-            {user && <MyChats/>}
-            {user && <ChatBox/>}
+            {user && 
+            <MyChats fetchAgain={fetchAgain} />}
+            {user && <ChatBox
+            fetchAgain={fetchAgain} setFetchAgain={setFetchAgain}/>}
         </Box>
     </div>
   )
